@@ -21,7 +21,13 @@ class DefaultController extends Controller
     {
         $bike = new CreateEvent();
         
-        $form = $this->createForm(new CreateEventType(), $bike);//, action array?
+        $form = $this->createForm(new CreateEventType(), $bike);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            echo 'Create request is '.$request->getMethod();
+        }
                     
         return array('form' => $form->createView());
     }

@@ -15,9 +15,12 @@ class CreateEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction('create')
+            ->setMethod('POST')
             ->add('buyDate')
             ->add('brandName')
             ->add('modelName')
+            ->add('save', 'submit', array('label' => 'Utwórz'))
         ;
     }
     
