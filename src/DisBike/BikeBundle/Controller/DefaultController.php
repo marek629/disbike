@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/bike/create")
+     * @Route("/bike/create", name="bike-create")
      * @Template()
      */
     public function createAction(Request $request)
@@ -29,8 +29,6 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            echo 'Create request is '.$request->getMethod();
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $createEvent = $form->getData();
@@ -43,9 +41,21 @@ class DefaultController extends Controller
             $entityManager->persist($createEvent);
             $entityManager->flush();
 
-            //return $this->redirectToRoute(...);
+            return $this->redirectToRoute('bike-list');
         }
 
         return array('form' => $form->createView());
+    }
+
+
+    /**
+     * @Route("/bike/list", name="bike-list")
+     * @Template()
+     */
+    public function listAction(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('BikeBundle:CreateEvent');
+
+        return array('bikeList' => $repository->findAll());
     }
 }
