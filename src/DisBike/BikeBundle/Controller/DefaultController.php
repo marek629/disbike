@@ -54,7 +54,7 @@ class DefaultController extends Controller
      */
     public function listAction(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository('BikeBundle:CreateEvent');
+        $repository = $this->getDoctrine()->getRepository('BikeBundle:Bike');
 
         return array('bikeList' => $repository->findAll());
     }

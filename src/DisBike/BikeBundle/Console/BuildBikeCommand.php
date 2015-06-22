@@ -2,13 +2,13 @@
 namespace DisBike\BikeBundle\Console;
 
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class BuildBikeCommand extends Command
+class BuildBikeCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -22,7 +22,7 @@ class BuildBikeCommand extends Command
     {
         $builder = new BikeBuilder();
 
-        $builder->buildWriteModel($this->getContainer()->get('doctrine'));
+        $builder->buildWriteModel($this->getContainer()->get('doctrine')->getEntityManager());
 
         $output->writeln('Bike build success!');
     }

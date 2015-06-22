@@ -13,4 +13,13 @@
         </service>
     </services>
     -->
+
+    <services>
+        <service id="disbike_bike.command.build_bike"
+            class="DisBike\BikeBundle\Console\BuildBikeCommand">
+
+            <tag name="console.command" />
+        </service>
+    </services>
+
 </container>

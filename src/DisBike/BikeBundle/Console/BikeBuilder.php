@@ -8,7 +8,6 @@ use DisBike\BikeBundle\Entity\Bike;
 class BikeBuilder {
     public function buildWriteModel($entityManager)
     {
-#         $entityManager = $this->getContainer()->get('doctrine');
         $repository = $entityManager->getRepository('BikeBundle:CreateEvent');
 
         foreach ($repository->findAll() as $bikeCreateEvent) {
