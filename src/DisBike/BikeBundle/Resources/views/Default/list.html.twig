@@ -13,7 +13,7 @@
         <th>Marka</th>
         <th>Model</th>
         <th>Data kupna</th>
-        <th>Przebieg [m]</th>
+        <th>Przebieg [km]</th>
     </tr>
 </thead>
 <tbody>
@@ -23,7 +23,7 @@
         <td>{{ bike.brandName }}</td>
         <td>{{ bike.modelName }}</td>
         <td>{{ bike.buyDate|date('Y-m-d') }}</td>
-        <td>{{ bike.distanceMeters }}</td>
+        <td>{{ bike.distanceMeters / 1000 }}</td>
         {#
         <td><a href="users/edit/{{ user.id }}">Edit</a></td>
         <td><a href="users/delete/{{ user.id }}">Delete</a></td>
