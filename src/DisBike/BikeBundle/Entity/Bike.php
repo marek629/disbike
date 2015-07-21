@@ -24,30 +24,37 @@ class Bike
     /**
      * @var string
      *
-     * @ORM\Column(name="bikeId", type="string", length=200)
+     * @ORM\Column(name="bike_id", type="string", length=200)
      */
     private $bikeId;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="buyDate", type="datetime")
+     * @ORM\Column(name="buy_date", type="datetime")
      */
     private $buyDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="brandName", type="string", length=200)
+     * @ORM\Column(name="brand_name", type="string", length=200)
      */
     private $brandName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="modelName", type="string", length=200)
+     * @ORM\Column(name="model_name", type="string", length=200)
      */
     private $modelName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="distance_meters", type="integer", nullable=true)
+     */
+    private $distanceMeters;
 
 
     /**
@@ -150,5 +157,28 @@ class Bike
     public function getModelName()
     {
         return $this->modelName;
+    }
+
+    /**
+     * Set distanceMeters
+     *
+     * @param integer $distanceMeters
+     * @return Bike
+     */
+    public function setDistanceMeters($distanceMeters)
+    {
+        $this->distanceMeters = $distanceMeters;
+
+        return $this;
+    }
+
+    /**
+     * Get distanceMeters
+     *
+     * @return integer
+     */
+    public function getDistanceMeters($distanceMeters)
+    {
+        return $this->distanceMeters;
     }
 }
