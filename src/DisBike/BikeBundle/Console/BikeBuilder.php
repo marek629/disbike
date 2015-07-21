@@ -3,6 +3,7 @@ namespace DisBike\BikeBundle\Console;
 
 
 use DisBike\BikeBundle\Entity\Bike;
+use DisBike\BikeBundle\Entity\CreateEvent;
 
 use Doctrine\ORM\EntityManager;
 
@@ -15,11 +16,7 @@ class BikeBuilder {
         $repository = $entityManager->getRepository('BikeBundle:CreateEvent');
 
         foreach ($repository->findAll() as $bikeCreateEvent) {
-            $bike = new Bike();
-            $bike->setBikeId($bikeCreateEvent->getBikeId());
-            $bike->setBuyDate($bikeCreateEvent->getBuyDate());
-            $bike->setBrandName($bikeCreateEvent->getBrandName());
-            $bike->setModelName($bikeCreateEvent->getModelName());
+            $bike = $this->createBike($bikeCreateEvent);
             $bike = $this->increaseDistance($bike, $entityManager);
 
             $entityManager->persist($bike);
@@ -30,6 +27,21 @@ class BikeBuilder {
     private function clearBikeRepository(EntityManager $entityManager)
     {
         $entityManager->createQuery('DELETE FROM BikeBundle:Bike')->execute();
+    }
+
+    /**
+     * @param CreateEvent $createEvent
+     * @return Bike
+     */
+    private function createBike(CreateEvent $createEvent)
+    {
+        $bike = new Bike();
+        $bike->setBikeId($createEvent->getBikeId());
+        $bike->setBuyDate($createEvent->getBuyDate());
+        $bike->setBrandName($createEvent->getBrandName());
+        $bike->setModelName($createEvent->getModelName());
+
+        return $bike;
     }
 
     /**
