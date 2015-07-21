@@ -6,7 +6,7 @@ use DisBike\BikeBundle\Entity\Bike;
 
 
 class BikeBuilder {
-    public function buildWriteModel($entityManager)
+    public function buildReadModel($entityManager)
     {
         $repository = $entityManager->getRepository('BikeBundle:CreateEvent');
 

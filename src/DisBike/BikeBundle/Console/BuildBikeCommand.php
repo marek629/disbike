@@ -22,7 +22,7 @@ class BuildBikeCommand extends ContainerAwareCommand
     {
         $builder = new BikeBuilder();
 
-        $builder->buildWriteModel($this->getContainer()->get('doctrine')->getEntityManager());
+        $builder->buildReadModel($this->getContainer()->get('doctrine')->getEntityManager());
 
         $output->writeln('Bike build success!');
     }
