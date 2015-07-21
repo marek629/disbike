@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class DistanceIncreaseEventRepository extends EntityRepository
 {
+	public function findByBikeId($bikeId)
+	{
+		assert(is_string($bikeId));
+		assert(strlen($bikeId) > 0);
+
+		return $this->findBy(array('bikeId' => $bikeId));
+	}
 }

@@ -177,7 +177,7 @@ class Bike
      *
      * @return integer
      */
-    public function getDistanceMeters($distanceMeters)
+    public function getDistanceMeters()
     {
         return $this->distanceMeters;
     }

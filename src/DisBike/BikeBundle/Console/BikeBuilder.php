@@ -20,6 +20,7 @@ class BikeBuilder {
             $bike->setBuyDate($bikeCreateEvent->getBuyDate());
             $bike->setBrandName($bikeCreateEvent->getBrandName());
             $bike->setModelName($bikeCreateEvent->getModelName());
+            $bike = $this->increaseDistance($bike, $entityManager);
 
             $entityManager->persist($bike);
             $entityManager->flush();
@@ -29,5 +30,22 @@ class BikeBuilder {
     private function clearBikeRepository(EntityManager $entityManager)
     {
         $entityManager->createQuery('DELETE FROM BikeBundle:Bike')->execute();
+    }
+
+    /**
+     * @param Bike $bike
+     * @param EntityManager $entityManager
+     * @return Bike
+     */
+    private function increaseDistance(Bike $bike, EntityManager $entityManager)
+    {
+        $repository = $entityManager->getRepository('BikeBundle:DistanceIncreaseEvent');
+
+        foreach ($repository->findByBikeId($bike->getBikeId()) as $distanceIncreaseEvent) {
+            $distanceMeters = $bike->getDistanceMeters() + $distanceIncreaseEvent->getMeters();
+            $bike->setDistanceMeters($distanceMeters);
+        }
+
+        return $bike;
     }
 }
